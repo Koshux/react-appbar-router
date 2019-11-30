@@ -5,7 +5,7 @@ export default function IndexPage (props) {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={12}>Hi, found these props: {props}.</Grid>
+        <Grid item xs={12}>Hi from Dashboard with props: {props.data}.</Grid>
       </Grid>
     </>
   )

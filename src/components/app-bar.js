@@ -3,13 +3,13 @@ import clsx from 'clsx'
 import React from 'react'
 
 // mine
-import ListItemLink from './list-item-link'
-import IndexPage from '../pages/index'
 import PageOne from '../pages/page-1'
+import IndexPage from '../pages/index'
+import ListItemLink from './list-item-link'
 
 // mui-icons
-import MenuIcon from '@material-ui/icons/Menu'
 import HomeIcon from '@material-ui/icons/Home'
+import MenuIcon from '@material-ui/icons/Menu'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
@@ -20,7 +20,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import Toolbar from '@material-ui/core/Toolbar'
-import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -162,12 +161,8 @@ export default function LeftDrawerRouter(props) {
           <div className={classes.root}>
             <Paper elevation={0}>
               <List aria-label="All pages being routed with react-router">
-                <Tooltip title="Dashboard" arrow>
-                  <ListItemLink to="/" primary="Home" icon={<HomeIcon />} alt="Dashboard" />
-                </Tooltip>
-                <Tooltip title="PageOne" arrow>
-                  <ListItemLink to="/page-1" primary="PageOne" icon={<ListAltIcon />} alt="PageOne" />
-                </Tooltip>
+                <ListItemLink to="/" primary="Home" icon={<HomeIcon />} alt="Dashboard" />
+                <ListItemLink to="/page-one" primary="Page One" icon={<ListAltIcon />} alt="Page One" />
               </List>
             </Paper>
           </div>
@@ -176,11 +171,11 @@ export default function LeftDrawerRouter(props) {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route path="/">
-              <IndexPage />
+            <Route exact path="/">
+              <IndexPage data={[0, 1, 2]} />
             </Route>
-            <Route path="/page-1">
-              <PageOne />
+            <Route path="/page-one">
+              <PageOne data={[1, 0]} />
             </Route>
           </Switch>
         </main>
