@@ -3,14 +3,12 @@ import clsx from 'clsx'
 import React from 'react'
 
 // mine
-import PageOne from '../pages/page-1'
-import IndexPage from '../pages/index'
+import Page from '../pages/page'
 import ListItemLink from './list-item-link'
 
 // mui-icons
 import HomeIcon from '@material-ui/icons/Home'
 import MenuIcon from '@material-ui/icons/Menu'
-import ListAltIcon from '@material-ui/icons/ListAlt'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 // mui-core
@@ -161,8 +159,28 @@ export default function LeftDrawerRouter(props) {
           <div className={classes.root}>
             <Paper elevation={0}>
               <List aria-label="All pages being routed with react-router">
-                <ListItemLink to="/" primary="Home" icon={<HomeIcon />} alt="Dashboard" />
-                <ListItemLink to="/page-one" primary="Page One" icon={<ListAltIcon />} alt="Page One" />
+                {props.pages.length === 0
+                  ? (
+                    <ListItemLink
+                      to="/"
+                      primary="Home"
+                      alt="Dashboard"
+                      key="Dashboard"
+                      icon={<HomeIcon />}
+                    />
+                  )
+                  : [...props.pages.map(page => {
+                    return (
+                      <ListItemLink
+                        to={page.path}
+                        alt={page.alt}
+                        icon={page.icon}
+                        key={page.primary}
+                        primary={page.primary}
+                      />
+                    )
+                  })]
+                }
               </List>
             </Paper>
           </div>
@@ -171,12 +189,23 @@ export default function LeftDrawerRouter(props) {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Switch>
-            <Route exact path="/">
-              <IndexPage data={[0, 1, 2]} />
-            </Route>
-            <Route path="/page-one">
-              <PageOne data={[1, 0]} />
-            </Route>
+            {props.pages.length === 0
+              ? (<Route key="Dashboard" exact path="/"><Page /></Route>)
+              : [...props.pages.map(page => {
+                return (
+                  page.path === '/'
+                    ? (
+                      <Route key={page.primary} exact path={page.path}>
+                        <Page data={page.data} component={page.component} />
+                      </Route>
+                    )
+                    : (
+                      <Route key={page.primary} path={page.path}>
+                        <Page data={page.data} component={page.component} />
+                      </Route>
+                    )
+                )
+              })]}
           </Switch>
         </main>
       </div>

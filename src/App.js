@@ -1,14 +1,14 @@
 import React from 'react'
 import AppBar from './components/app-bar'
 
-class App extends React.PureComponent {
-  render () {
-    return (
-      <div className="app">
-        <AppBar />
-      </div>
-    )
-  }
+export default function App (props) {
+  return (
+    <div className="app">
+      {
+        props.pages == null || props.pages.length === 0
+          ? (<AppBar pages={[]}/>)
+          : (<AppBar pages={[...props.pages]} />)
+      }
+    </div>
+  )
 }
-
-export default App
