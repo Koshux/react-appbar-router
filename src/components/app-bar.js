@@ -158,7 +158,7 @@ export default function LeftDrawerRouter(props) {
 
           <div className={classes.root}>
             <Paper elevation={0}>
-              <List aria-label="All pages being routed with react-router">
+              <List aria-label="All pages are routed through react-router">
                 {props.pages.length === 0
                   ? (
                     <ListItemLink

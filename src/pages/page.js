@@ -6,7 +6,7 @@ export default function Page (props) {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          {props.component == null ? `Hi from the default page.` : props.component}
+          {props.component == null ? `You have not provided any components to be displayed here.` : props.component}
         </Grid>
       </Grid>
     </>
